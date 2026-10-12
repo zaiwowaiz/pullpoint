@@ -40,6 +40,10 @@
   f.addEventListener('load', function () { f.style.visibility = 'visible'; document.getElementById('wait').hidden = true; });
   f.src = APP;
   setTimeout(function () { if (f.style.visibility === 'hidden') document.getElementById('help').hidden = false; }, 12000);
+  // Il tasto "Aggiorna" dell'app chiede di ricaricarla: si ricarica la pagina di Google con la versione nuova
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.pullpoint === 'ricarica') f.src = APP + '?v=' + Date.now();
+  });
   if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function () {}); }
 </script>
 </body>
